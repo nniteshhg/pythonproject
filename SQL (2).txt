@@ -1,0 +1,371 @@
+--Class_1
+
+-SQL - Structured Query language
+
+
+--diffrent versions RDBMS
+--1.SQL server - Microsoft
+--2.SQL developer - Oracle
+--3.Tera data - Teradata
+--4.DB2 - IBM
+--5.MangoDB - Open Source
+--6.MySQL - open source  etc 
+
+
+--Q.What is data?
+--Collection of meaniful information.
+--OR
+--Collection record information.
+
+--Q. What is database(DBMS)?
+--it is collection of data in file format.
+--ex:Excel,word file,text file, notepad , notepad++ etc.
+
+--it stores less amount of data 
+--no relationship between two files or tables 
+
+
+--Q.What is RDBMS(Relatinal data base management system)?
+--it is collection of table related information.
+--it stores huge amount of data and to extract the data we have a simple language i.e. SQL
+--There is relation between two or more tables.
+
+--Q.what is table ?
+--it is collection of rows and columns.
+
+
+--SQL is not a case sensitive language
+--The meaning 'A' is always same 'a'
+--for ex: 'AMAR' it has same meaning of 'amar'
+
+
+--In SQL
+--Blue color indicates system defined keywords
+--for ex
+create, use, insert etc
+--Pink color indicates system defined functions 
+--for ex
+sum,min,max etc 
+
+
+--Data types 
+--Type of data/value of an object can hold is known as data type.
+--A].Numeric data type 
+
+--1.BIT
+--it stores value 0 or 1
+
+--2.TINYINT 
+--It will store the value ranging from 0 to 255
+
+--3.SMALLINT
+--it will store value ranging -32768 to 32767
+
+--4.Decimal
+--an exact fixed point number 
+
+--5. INT
+--it stores an integer value i.e. ranging from -2147483648 to 2147483647
+
+--B].Approximate numeric data type 
+--1.Float 
+--it will store floating point number range is -1.8E to 308 to 1.8E to 308
+--for Ex: 8.2345, 0.9876 etc
+--2.Real
+--it will also store an floating point numbers -3.40E to 38 to 3.40E to 38
+
+--C].String or charecter data type
+--1.char - 0-9,a-z,A-Z and Special symbol it will store data as 1 bit
+--Static memory allocation and it is having size of 8000 chars
+--for ex: char(20) -- AMAR - 4 char reaming 16 blocks of memory waisted because it has been fixed
+
+
+--2.varchar -  - 0-9,a-z,A-Z and Special symbol
+--It is dynamic memory allocation and it will store data as 1 bit
+--for ex: varchar(20) -- AMAR - 4 char reaming 16 blocks of memory it will releasse has been fixed
+declare @val1 varchar(8000)='AMARPatil';
+print @val1
+print datalength(@val1)
+print len(@val1)
+
+
+--3.nchar
+--It is static memory allocation and it can store 4000 charecters (1 char it will occupy 2bytes)
+declare @value nchar(4000) = 'AMAR'
+print @value
+print datalength(@value)
+print len(@value)
+
+--4.nvarchar
+--It is dynamic memory allocation and it can store 4000 charecters (1 char it will occupy 2bytes).
+
+declare @value1 nvarchar(4000) = 'AMAR'
+print @value1
+print datalength(@value1)
+print len(@value1)
+
+--D].data and Time data type 
+--1.date 
+--It will allow you to insert the date in mulptiple formats 
+--For Ex: YYYY/MM/DD,DD/MM/YYYY,YYYY/DD/MM etc 
+select GETDATE()
+
+declare @date1 date = getdate()
+print @date1
+--2.time 
+--it will allow you to insert the time in below format
+--HH:MM:SS:MS
+
+declare @time time  = getdate()
+print @time
+
+--3.Datetime
+--It will allow you to insert date and time together.
+--YYYY/MM/DD HH:MM AM/PM
+
+declare @datetime datetime  = getdate()
+print @datetime
+
+-----------------------------------------------------------
+
+Class 2
+
+--1.DDL(Data Defination lamguage) 
+--These statements are basically used to perform structure related operation w.r.to table.
+--Create,Drop,Truncate,Alter,Rename (Dr.CAT)
+
+--Create
+--This Is DDL SQL statement and used to create database and Table.
+
+--Q.How to create Database ?
+Create database Testing20
+
+--Q.How to select or Navigate to a particular database?
+--By using USE keyword and database name
+use Testing20
+--Just go to top scroll bar and click on down arrow and select your database
+
+
+--Q.How to create Table?
+Create table FirstTable(
+FID int,
+FirstName varchar(20),
+LastName varchar(20),
+City varchar(20),
+Age int);
+
+--In SQL if you want to terminate SQL statement then use ; at the end of statement.
+
+--2.DML(Data Manipulation Language)
+--These statements are used to operate the data stored inside into the table.
+--DML statements are used to play with table data.
+--below are the diffrent statements
+--SELECT,INSERT,UPDATE,DELETE (S_UID)
+
+--SELECT
+--Select statement is used to select the data which you have written
+--This is DML statement and used to fetch the records from table.
+select 88888
+
+select 'Scodeen Global'
+
+select scodeen  --Exception/Error -Invalid column name 'scodeen'.
+
+
+--Q.How to fetch the complete data from a table?
+select * from FirstTable;
+
+--Q.how to select a particular column from table?
+select firstname,age from FirstTable
+
+--* - it will indicate we are selecting complete data from table
+
+--Q.How will you insert the data into the table?
+--INSERT
+--Insert Statement is used to insert the data into the table.
+--By two ways we can insert the data into the table
+--METHOD-I
+--We have to insert the data sequence wise how we have created the table
+insert into FirstTable values(1,'Praveen','Patil','Pune',30);
+
+insert into FirstTable values(1,'Praveen','Patil','Pune'); --Erorr -Column name or number of supplied values does not match table definition.
+
+select * from FirstTable
+
+--METHOD-II
+--We dont have restrictions to insert the data as per column sequence defined in table.
+--While inserting the data we have to mention column names in insert statement.
+insert into FirstTable (FID,FirstName) values (2,'Amit')
+
+insert into FirstTable (FirstName,FID,Age,LastName) values ('Puneet',3,24,'sharma');
+
+insert into FirstTable (Age,FID,FirstName,LastName) values (35,4,'Puskar','Verma')
+insert into FirstTable (Age,FID,FirstName,LastName) values (27,5,'Meena','Patil')
+
+select * from FirstTable
+
+---------------------------------------------------------------
+
+Class 3
+
+--1.Where
+--Where clause is used with comaprision operator,arithmatic and logical operators.
+--It used to filter the specific condition or we can select a particlar records from table.
+
+--Operators
+--1.Comaprision Operator 
+--2.Logical Operator
+--3.Arithmatic operator
+--4.IN and NOT IN
+--5.Between and NOT BETWEEN
+--6.LIKE
+
+--1.Comaprision Operator 
+--it is used to compare the condition provided in filter clauses or where clause.
+-- = - equal to
+-- > - greater than
+-- < - less than
+-- >= - greater than equal to
+-- <= - less than equal to
+-- != or <> -not equal to
+
+
+create table employee
+(EID int,
+FirstName varchar(20),
+LastName varchar(20),
+Loc varchar(20),
+Dept varchar(20),
+salary int)
+
+insert into employee values (1,'Rohan','Mane','Sangali','HR',15000)
+insert into employee values (2,'Sheetal','Chavan','Parbhani','Finance',25000)
+insert into employee values (3,'Amit','Patil','Latur','HR',16000)
+insert into employee values (4,'Riya','Verma','Pune','Account',20000)
+insert into employee values (5,'Sita','Sharma','Patna','HR',15000)
+insert into employee values (6,'Kirti','Gold','Solapur','Staffing',35000)
+insert into employee values (7,'Sohan','Jadhav','Miraj','Account',45000)
+insert into employee values (8,'Priyanka','Sharma','Nagpur','Finance',46000)
+insert into employee values (9,'Virat','Patil','Jaipur','Staffing',34000)
+insert into employee values (10,'Sohil','Khan','Mumbai','HR',33000)
+insert into employee values (11,'Ronit','Patil','Miraj','Admin',NULL)
+
+select * from employee where dept = 'HR'
+select * from employee where EID > 5
+select * from employee where EID < 4
+select * from employee where EID >= 7
+select * from employee where EID <= 4
+select * from employee where EID <> 7  --not equal to
+select * from employee where EID != 7  --not equal to
+
+
+--2 Logical Operator 
+--these operators are used to compare two inputs logically and provide the result.
+--AND
+--It will be just like multiplication 
+
+--AND oeartion
+--A		B		O/P
+--0		0		0
+--0		1		0
+--1		0		0
+--1		1		1
+
+--A			B			O/P
+--False		False		False
+--False		True		False
+--True		False		False
+--True		True		True
+
+select * from employee where eid = 1 and dept = 'Finance'
+select * from employee where EID =5 and loc ='Patna'
+
+--OR
+--It will work like addition
+--OR operation
+--A		B		O/P
+--0		0		0
+--0		1		1
+--1		0		1
+--1		1		1
+
+--A			B			O/P
+--False		False		False
+--False		True		True
+--True		False		True
+--True		True		True
+
+select * from employee where eid = 11 or dept = 'Finance'
+select * from employee 
+
+select * from employee where EID =5 or salary > 40000 or loc ='Pune'
+
+
+
+--3.IN and NOT IN operator 
+--This operator will allow you to navigate or point out the values whisch mentained or mentioned inside the in clause.
+--Not In operator will perform vice-versa opeartion as compared to IN opeartor.
+
+select * from employee where eid => 1,2 -- incoreect syntax because comparision opeartor will allow you to insert only one condition.
+
+select * from employee where eid in (1,3,4,5)
+select * from employee where eid not in (1,3,4,5)
+
+select * from employee where loc in ('Pune','sangali','Miraj')
+select * from employee where loc not in ('Pune','sangali','Miraj')
+
+
+--4.Between and Not between
+--This operator/ clause is used to display the values or records between the range you have specified.
+--This operator works along with AND operator.
+
+select * from employee where EID between 2 and 6
+
+select * from employee where Loc between 'A' and 'N'   --A to N-1
+
+--Not Between
+select * from employee where EID not between 2 and 6
+
+select * from employee where Loc not between 'A' and 'N'  -- 
+
+
+--5.LIKE 
+--LIKE operator is used to search for a specified pattern in a column.
+--Mostly like operator is used in where clause.
+--Like operator used wildcards for searching a pattern
+--1. % - Represents zero,one or multiple charecters or numbers./ A substitue for Zero or more characters
+--2. _ - Represents one or single charecters./A A substitue for exactly one character.
+--3.[Charlist] - Any single charecter in charlist ex: [ABC]
+--4.[^Charlist] -any charecter not in charlist
+
+--ex:  Seeta,meeta,geeta sena, sona siya 
+
+--'S%' - start with 'S' chareter and it will display all the names which starts with S.
+--'%S' - End with 'S' charetcer and it will display all the names which END with S.
+--'%S%' -Anywhere inside record/column if 'S' charetcer and it will display all the names which starts or ends or anywhere inside into a column.
+
+select * from employee where FirstName like 's%' ---at the start of name s
+
+select * from employee where FirstName like '%A' -- at the end of name a
+
+select * from employee where FirstName like '%A%' --anywhere inside or start or end.
+
+--Display the name whose third letter starts with r
+select * from employee where FirstName like '__r%' --Kirti,Virat
+
+--Display the name which starts with s and ends with A
+select * from employee where FirstName like 's%a' 
+
+
+select * from employee where FirstName like '[ARV]%' -- it will display the names which start with A,R and V.
+
+select * from employee where FirstName like '[^ARV]%' -- it will display the name which not start with A,R and V.
+
+select * from employee where FirstName like '%[ARV]'
+
+select * from employee where firstname like '[A-E]%' -- it will diplay all the names which is in range of A to E 
+
+select * from employee where firstname like '[A-O]%'
+
+--Q.How will you display the names which ends with r and t?
+--Q.How will you display the name whose second last letter is T?
